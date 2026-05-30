@@ -34,7 +34,7 @@ impl SubtitleDecomposer {
         if trimmed.starts_with("WEBVTT") {
             SubFormat::VTT
         } else if trimmed.starts_with('1')
-            || trimmed.split_whitespace().next().map_or(false, |n| n.parse::<u32>().is_ok())
+            || trimmed.split_whitespace().next().is_some_and(|n| n.parse::<u32>().is_ok())
         {
             // Heuristic: SRT starts with a sequence number (usually 1)
             SubFormat::SRT
